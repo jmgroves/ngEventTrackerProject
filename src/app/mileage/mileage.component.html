@@ -1,0 +1,67 @@
+<span><h1>Current Total MPG: {{totalMpg | number:'1.1-2'}}</h1> <div *ngIf=!editMileage> Metric: <input type="checkbox" name="Metric" (change)="reload()" [(ngModel)]="boolMetric" /></div></span>
+
+<form *ngIf="!selected">
+    <input type="number" placeholder="{{distance}} Driven" name="milesDriven" [(ngModel)]="newMileage.milesDriven" /> |
+    <input type="number" placeholder="{{amount}} Used" name="gallonsUsed" [(ngModel)]="newMileage.gallonsUsed" /> |
+    <input type="text" placeholder="Gas Station" name="gasStation" [(ngModel)]="newMileage.gasStation" /> |
+    <input type="text" placeholder="Comment" name="comment" [(ngModel)]="newMileage.comment" /> |
+    <button class="btn btn-primary btn-sm " (click)="create(newMileage)">Log New Report</button>
+  </form>
+
+<table class="table table-sm table-hover table-bordered table-striped" *ngIf="!selected">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">{{distance}} Driven</th>
+        <th scope="col">{{amount}} Used</th>
+        <th scope="col">Gas Station</th>
+        <th scope="col">View Details</th>
+        <th scope="col">Destroy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of mileages" >
+
+        <td>{{event.id}}</td>
+        <td>{{event.milesDriven * distanceRate | number:'1.1-2'}}</td>
+          <td>{{event.gallonsUsed * volumeRate | number:'1.1-2'}}</td>
+          <td>{{event.gasStation}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="displayEvent(event)">Details</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteEvent(event.id)">X</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf= selected&&!editMileage>
+
+      <table class="table table-sm table-hover table-bordered table-striped">
+        <tr><td>Id: {{selected.id}}</td></tr>
+          <tr><td>{{distance}} Driven: {{selected.milesDriven * distanceRate | number:'1.1-2'}}</td></tr>
+          <tr><td>{{amount}} Used: {{selected.gallonsUsed * volumeRate | number:'1.1-2'}}</td></tr>
+          <tr><td>Gas Station: {{selected.gasStation}}</td></tr>
+          <tr><td>Comments: {{selected.comment}}</td></tr>
+          <td>
+      <button class="btn btn-primary btn-sm" (click)="setCancel()">Back</button> |
+
+      <button class="btn btn-primary btn-sm" (click)="setEditMileage()">Edit</button> |
+      <button class="btn btn-danger btn-sm" (click)="deleteEvent(selected.id)">Delete</button>
+    </table>
+    </div>
+
+
+    <div>
+        <form *ngIf=editMileage name="editForm">
+          <input type="number" placeholder="Miles Driven" name="milesDriven" [(ngModel)]="editMileage.milesDriven" /><br>
+          <input type="number" placeholder="Gallons Used" name="gallonsUsed" [(ngModel)]="editMileage.gallonsUsed" /><br>
+          <input type="text" placeholder="Gas Station" name="gasStation" [(ngModel)]="editMileage.gasStation" /><br>
+          <input type="text" placeholder="Comment" name="comment" [(ngModel)]="editMileage.comment" /><br>
+          <button class="btn btn-primary btn-sm" (click)="updateMileage(editMileage)">Save</button>
+         <button class="btn btn-primary btn-sm" (click)="setCancel()">Cancel</button>
+
+        </form>
+      </div>
