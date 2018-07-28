@@ -1,3 +1,10 @@
+### Angular Front End for EventTrackerProject
+## Jared Groves
+
+
+# Features
+Leverages Angular 6 to create highly responsive front end. Used bootstrap got general beautification and layout assistance. Allows user to easily perfrom CRUD operations with the back end
+
 # NgEventTracker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
@@ -25,3 +32,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Lessons Learned
+
+* Angular 6 is a great tool to use to create dynamic front end
+* Created services to connect to Java controllers IOT access database and retrieve data 
+* Used bootstrap to quickly give the front end a better "feel"
+
